@@ -1,53 +1,60 @@
 package Database;
-import Interface.*;
-import Model.Item;
-import Model.Manager;
-import Model.SalesMan;
 
-public class DatabaseManger implements ManagerInterface,SalesmanInterface,OwnerInterface{
+import Model.*;
 
-    @Override
-    public void addItem(Item item, String Id) {
+import java.util.ArrayList;
+import java.util.HashMap;
 
+
+
+public class DatabaseManger {
+
+    Database database =Database.getInstance();
+
+    HashMap<String, Float> getSalesList(){
+        return database.getSalesList();
     }
 
-    @Override
-    public void deleteItem(String itemId, String Id) {
-
+    HashMap<String, Float> getPurchaseList(){
+        return database.getPurchaseList();
     }
 
-    @Override
-    public void sales(String itemId, float quantity, String Id) {
-
+    ArrayList<Manager> getManagerList(){
+        return database.getManagerList();
     }
 
-    @Override
-    public void purchase(String item, float quantity, String Id) {
-
+    ArrayList<SalesMan> getSalesManList(){
+        return database.getSalesManList();
+    }
+    ArrayList<Item> getItemList(){
+        return database.getItemList();
     }
 
-    @Override
-    public void showList() {
-
+    void addSales(HashMap<String ,Float> salesList){
+       database.setSalesList(salesList);
     }
-
-    @Override
-    public void addManager(Manager manager) {
-
+    void addPurchase(HashMap<String ,Float> purchaseList){
+        database.setPurchaseList(purchaseList);
     }
-
-    @Override
-    public void addSalesman(SalesMan salesman) {
-
+    void addManager(Manager manager){
+        database.addManager(manager);
     }
-
-    @Override
-    public float salary(String empId, String designation) {
-        return 0;
+    void addSaleMan(SalesMan salesMan){
+        database.addSaleMan(salesMan);
     }
-
-    @Override
-    public void turnover(int choice) {
-
+    void addItem(Item item){
+        database.addItem(item);
+    }
+    void removeItem(Item item){
+        database.removeItem(item);
+    }
+    void addSales(String id){
+        database.addSales(id, (float) 0.0);
+    }
+    void addPurchase(String id,float quantity){
+        database.addPurchase(id, quantity);
+    }
+    void updateItem(ArrayList<Item> itemList){
+        database.setItemList(itemList);
     }
 }

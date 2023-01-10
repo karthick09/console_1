@@ -1,12 +1,12 @@
 package Model;
 
-public abstract class Person {
+public abstract class User {
     private final String name;
     private String email;
     private String phone;
     private final Account account;
 
-    public Person(String name, String email, String phone, Account account) {
+    public User(String name, String email, String phone, Account account) {
         this.name = name;
         this.email = email;
         this.phone = phone;

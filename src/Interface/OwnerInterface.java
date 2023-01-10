@@ -6,6 +6,6 @@ import Model.SalesMan;
 public interface OwnerInterface {
     void addManager(Manager manager);
     void addSalesman(SalesMan salesman);
-    float salary(String empId,String designation);
+    void salary(String empId,int designation);
     void turnover(int choice);
 }

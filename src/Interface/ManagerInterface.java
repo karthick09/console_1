@@ -1,9 +1,9 @@
 package Interface;
 import Model.*;
 public interface ManagerInterface {
-    void addItem(Item item,String Id);
-    void deleteItem(String itemId,String Id);
-    void sales(String itemId,float quantity,String Id);
-    void purchase(String item,float quantity,String Id);
+    void addItem(Item item);
+    void deleteItem(String itemId);
+    void sales(String itemId,float salesQuantity);
+    void purchase(String id,float purchaseQuantity);
     void showList();
 }
