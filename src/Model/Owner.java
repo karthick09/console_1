@@ -12,16 +12,16 @@ public class Owner {
         this.ownerInterface=application;
     }
 
-    void addManager(Manager manager){
+    public void addManager(Manager manager){
         ownerInterface.addManager(manager);
     }
-    void addSalesman(SalesMan salesman){
+    public void addSalesman(SalesMan salesman){
         ownerInterface.addSalesman(salesman);
     }
-    void salary(String empId,int designation){
+    public void salary(String empId,int designation){
         ownerInterface.salary(empId,designation);
     }
-    void turnover(int choice){
+    public void turnover(int choice){
         ownerInterface.turnover(choice);
     }
     public String getPassword() {

@@ -2,11 +2,12 @@
 package Control;
 
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import Database.Application;
-import Model.Owner;
+import Model.*;
 
 public class OwnerControl{
     private final Owner owner;
@@ -38,6 +39,27 @@ public class OwnerControl{
             value=(stringLength>=5);
         }while (!value||!isAlphabet);
         return string;
+    }
+
+    int validateInteger()
+    {
+        boolean flag;
+        int integer1 = 0;
+        do {
+            flag = true;
+            try {
+                Scanner scanner = new Scanner(System.in);
+                integer1 = scanner.nextInt();
+
+            } catch (InputMismatchException ignored) {
+            }
+            if(integer1==0)
+            {
+                System.out.println("enter integer only:");
+                flag=false;
+            }
+        }while (!flag);
+        return integer1;
     }
 
     static String validateEmail()
@@ -149,6 +171,70 @@ public class OwnerControl{
         return string;
     }
     public void ownerAccess(Application application){
-
+        int choice2;
+        boolean flag=true;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("1.Add manager \n2.Add salesperson \n3.showList \n4.salary for employee\n5.turnover\n6.exit");
+            choice2 = validateInteger();
+            String userId = "", pass = "", name = "", email = "", phone = "";
+            if (choice2 < 3) {
+                System.out.println("enter the person details");
+                System.out.println("enter the username");
+                userId = validateUserName(choice2,application);
+                System.out.println("enter the password");
+                pass = validatePassword();
+                System.out.println("enter the name ");
+                name = validateName();
+                System.out.println("enter the email");
+                email = validateEmail();
+                System.out.println("enter the phone");
+                phone = validatePhoneNumber();
+            }
+            Account account = new Account(userId, pass);
+            switch (choice2) {
+                case 1 -> {
+                    System.out.println("enter the manager id");
+                    String mId = validateMId(application);
+                    Manager person = new Manager(name, email, phone, account,mId,application);
+                    owner.addManager(person);
+                }
+                case 2 -> {
+                    System.out.println("enter the salesperson id ");
+                    String salePersonId = validateSId(application);
+                    SalesMan person = new SalesMan(name, email, phone, account,salePersonId,application);
+                    owner.addSalesman(person);
+                }
+                case 3 -> {
+                    System.out.println("1.manger list \n2.salesman list \n3.item list");
+                    int ch = validateInteger();
+                    switch (ch) {
+                        case 1 -> application.getMangerList();
+                        case 2 -> application.getSaleManList();
+                        case 3 -> application.showList();
+                        default -> System.out.println("invalid choice");
+                    }
+                }
+                case 4 -> {
+                    String eId;
+                    int designation;
+                    System.out.println("1.manager\n2.salesman");
+                    designation = validateInteger();
+                    System.out.println("enter the employee id");
+                    eId = sc.next();
+                    owner.salary(eId, designation);
+                }
+                case 5 -> {
+                    System.out.println("1.total sales\n2.total purchase");
+                    int choice = validateInteger();
+                    owner.turnover(choice);
+                }
+                case 6 -> {
+                    flag=false;
+                    System.out.println("Exited successfully");
+                }
+                default -> System.out.println("invalid choice");
+            }
+        } while (flag);
     }
 }

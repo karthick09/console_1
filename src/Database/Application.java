@@ -163,6 +163,16 @@ public class Application implements ManagerInterface, SalesmanInterface, OwnerIn
         }
 
     }
+    public void getMangerList(){
+        for(Manager m :databaseManger.getManagerList()){
+            System.out.println("manger id :"+m.getMangerId()+" --manger name :"+m.getName());
+        }
+    }
+    public void getSaleManList(){
+        for(SalesMan sm :databaseManger.getSalesManList()){
+            System.out.println("salesMan id :"+sm.getSalesManId()+" --saleMan name :"+sm.getName());
+        }
+    }
     Item getItem(String id){
         for (Item I : databaseManger.getItemList()) {
             if (id.equals(I.getItemId())) {
