@@ -39,56 +39,55 @@ public class Main {
         Application application =new Application();
         String username,password;
         int choice1;
-        System.out.println("1.owner login \n2.manger login \n3.salesman \n4.exit");
-        choice1= validateInteger();
-        if(choice1==4){
-            System.exit(0);
-        }
-        switch (choice1){
-            case 1 ->{
-                System.out.println("enter the username");
-                username = sc.next();
-                System.out.println("enter the password");
-                password = sc.next();
-                if (username.equals("abc") && password.equals("123")){
-                    Owner owner = new Owner("owner",application);
-                    OwnerControl ownerControl = new OwnerControl(owner);
-                    ownerControl.ownerAccess(application);
+        do {
+            System.out.println("1.owner login \n2.manger login \n3.salesman \n4.exit");
+            choice1 = validateInteger();
+            if (choice1 == 4) {
+                System.exit(0);
+            }
+            switch (choice1) {
+                case 1 -> {
+                    System.out.println("enter the username");
+                    username = sc.next();
+                    System.out.println("enter the password");
+                    password = sc.next();
+                    if (username.equals("abc") && password.equals("123")) {
+                        Owner owner = new Owner("owner", application);
+                        OwnerControl ownerControl = new OwnerControl(owner);
+                        ownerControl.ownerAccess(application);
+                    } else {
+                        System.out.println("invalid username or password");
+                    }
                 }
-                else {
-                    System.out.println("invalid username or password");
+                case 2 -> {
+                    System.out.println("enter the username");
+                    username = sc.next();
+                    System.out.println("enter the password");
+                    password = sc.next();
+                    if (application.getLoginDetails(username, password, choice1)) {
+                        Manager manager;
+                        manager = application.getManager(username);
+                        ManagerControl managerControl = new ManagerControl(manager);
+                        managerControl.mangerAccess(application);
+                    } else {
+                        System.out.println("invalid username or password");
+                    }
+                }
+                case 3 -> {
+                    System.out.println("enter the username");
+                    username = sc.next();
+                    System.out.println("enter the password");
+                    password = sc.next();
+                    if (application.getLoginDetails(username, password, choice1)) {
+                        SalesMan salesMan;
+                        salesMan = application.getSalesMan(username);
+                        SalesmanControl salesmanControl = new SalesmanControl(salesMan);
+                        salesmanControl.salesManAccess();
+                    } else {
+                        System.out.println("invalid username or password");
+                    }
                 }
             }
-            case 2->{
-                System.out.println("enter the username");
-                username = sc.next();
-                System.out.println("enter the password");
-                password = sc.next();
-                if(application.getLoginDetails(username, password,choice1)){
-                    Manager manager;
-                    manager=application.getManager(username);
-                    ManagerControl managerControl =new ManagerControl(manager);
-                    managerControl.mangerAccess(application);
-                }
-                else{
-                    System.out.println("invalid username or password");
-                }
-            }
-            case 3->{
-                System.out.println("enter the username");
-                username = sc.next();
-                System.out.println("enter the password");
-                password = sc.next();
-                if(application.getLoginDetails(username, password,choice1)){
-                    SalesMan salesMan;
-                    salesMan=application.getSalesMan(username);
-                    SalesmanControl salesmanControl =new SalesmanControl(salesMan);
-                    salesmanControl.salesManAccess();
-                }
-                else{
-                    System.out.println("invalid username or password");
-                }
-            }
-        }
+        }while (true);
     }
 }
