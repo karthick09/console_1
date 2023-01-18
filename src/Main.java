@@ -2,6 +2,7 @@ import Control.ManagerControl;
 import Control.OwnerControl;
 import Control.SalesmanControl;
 import Database.Application;
+import Model.Account;
 import Model.Manager;
 import Model.Owner;
 import Model.SalesMan;
@@ -38,6 +39,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Application application =new Application();
         String username,password;
+        Owner o =new Owner("owner",application);
+        Account ac = new Account("karthick","muthu1309");
+        Manager man = new Manager("karthick","karthiock@gmail.com","1234567890",ac,"m101",application);
+        o.addManager(man);
+        Account ac1 = new Account("raghul","muthu1234");
+        SalesMan sa = new SalesMan("karthick","karthiock@gmail.com","1234567890",ac1,"s101",application);
+        o.addSalesman(sa);
         int choice1;
         do {
             System.out.println("1.owner login \n2.manger login \n3.salesman \n4.exit");

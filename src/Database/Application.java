@@ -19,8 +19,8 @@ public class Application implements ManagerInterface, SalesmanInterface, OwnerIn
     @Override
     public void addItem(Item item) {
         databaseManger.addItem(item);
-        databaseManger.addSales(item.getItemId());
-        databaseManger.addPurchase(item.getItemId(), item.getQuantity());
+        databaseManger.addSales(item);
+        databaseManger.addPurchase(item, item.getQuantity());
     }
 
     @Override
@@ -134,28 +134,17 @@ public class Application implements ManagerInterface, SalesmanInterface, OwnerIn
     @Override
     public void turnover(int choice) {
         if(choice==1){
-            HashMap<String, Float> salesList = databaseManger.getSalesList();
-            for (Map.Entry<String, Float> entry : salesList.entrySet()) {
-                Item item=getItem(entry.getKey());
-                if (item != null) {
-                    System.out.println("item id :"+entry.getKey()+" item name :"+item.getItemName()+" total sales count "+entry.getValue());
-                }
-                else{
-                    System.out.println("item id :"+entry.getKey()+" total sales count "+entry.getValue());
-                }
+            HashMap<Item, Float> salesList = databaseManger.getSalesList();
+            for (Map.Entry<Item, Float> entry : salesList.entrySet()) {
+                Item item=entry.getKey();
+                System.out.println("item id :"+item.getItemId()+" item name :"+item.getItemName()+" total sales count "+entry.getValue());
             }
         }
         else if (choice==2){
-            HashMap<String, Float> purchaseList  = databaseManger.getPurchaseList();
-            for (Map.Entry<String, Float> entry : purchaseList.entrySet()) {
-                Item item=getItem(entry.getKey());
-                if (item != null) {
-                    System.out.println("item id :"+entry.getKey()+"item name:"+item.getItemName()+" total purchase count "+entry.getValue());
-                }
-                else {
-                    System.out.println("item id :"+entry.getKey()+" total purchase count "+entry.getValue());
-
-                }
+            HashMap<Item, Float> purchaseList  = databaseManger.getPurchaseList();
+            for (Map.Entry<Item, Float> entry : purchaseList.entrySet()) {
+                Item item=entry.getKey();
+                System.out.println("item id :"+item.getItemId()+"item name:"+item.getItemName()+" total purchase count "+entry.getValue());
             }
         }
         else {
@@ -294,10 +283,10 @@ public class Application implements ManagerInterface, SalesmanInterface, OwnerIn
 
     void updateSalesList(Item item,float Quantity){
 
-        HashMap<String ,Float> salesList=databaseManger.getSalesList();
-        float value=salesList.get(item.getItemId());
+        HashMap<Item ,Float> salesList=databaseManger.getSalesList();
+        float value=salesList.get(item);
         value=value+Quantity;
-        salesList.put(item.getItemId(),value);
+        salesList.put(item,value);
         databaseManger.addSales(salesList);
     }
 
@@ -310,10 +299,10 @@ public class Application implements ManagerInterface, SalesmanInterface, OwnerIn
         databaseManger.updateItem(itemList);
     }
     void updatePurchaseList(Item item,float Quantity){
-        HashMap<String ,Float> purchaseList=databaseManger.getSalesList();
-        float value=purchaseList.get(item.getItemId());
+        HashMap<Item ,Float> purchaseList=databaseManger.getPurchaseList();
+        float value=purchaseList.get(item);
         value=value+Quantity;
-        purchaseList.put(item.getItemId(),value);
+        purchaseList.put(item,value);
         databaseManger.addPurchase(purchaseList);
     }
 }

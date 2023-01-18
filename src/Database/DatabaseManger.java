@@ -11,11 +11,11 @@ public class DatabaseManger {
 
     Database database =Database.getInstance();
 
-    HashMap<String, Float> getSalesList(){
+    HashMap<Item, Float> getSalesList(){
         return database.getSalesList();
     }
 
-    HashMap<String, Float> getPurchaseList(){
+    HashMap<Item, Float> getPurchaseList(){
         return database.getPurchaseList();
     }
 
@@ -30,10 +30,10 @@ public class DatabaseManger {
         return database.getItemList();
     }
 
-    void addSales(HashMap<String ,Float> salesList){
+    void addSales(HashMap<Item ,Float> salesList){
        database.setSalesList(salesList);
     }
-    void addPurchase(HashMap<String ,Float> purchaseList){
+    void addPurchase(HashMap<Item ,Float> purchaseList){
         database.setPurchaseList(purchaseList);
     }
     void addManager(Manager manager){
@@ -48,10 +48,10 @@ public class DatabaseManger {
     void removeItem(Item item){
         database.removeItem(item);
     }
-    void addSales(String id){
-        database.addSales(id, (float) 0.0);
+    void addSales(Item id){
+        database.addSales(id);
     }
-    void addPurchase(String id,float quantity){
+    void addPurchase(Item id,float quantity){
         database.addPurchase(id, quantity);
     }
     void updateItem(ArrayList<Item> itemList){

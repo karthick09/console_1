@@ -17,10 +17,10 @@ public class SalesMan extends User {
         this.salesmanInterface=application;
     }
 
-    void showList(){
+     public void showList(){
         salesmanInterface.showList();
     }
-    void sales(String itemId,float quantity){
+    public void sales(String itemId,float quantity){
         salesmanInterface.sales(itemId,quantity);
     }
     public String getSalesManId() {

@@ -19,15 +19,15 @@ public class Database {
     private ArrayList<Item> itemList = new ArrayList<>();
     private final ArrayList<Manager> managerList = new ArrayList<>();
     private final ArrayList<SalesMan> salesManList = new ArrayList<>();
-    private  HashMap<String, Float> salesList = new HashMap<>();
-    private  HashMap<String, Float> purchaseList = new HashMap<>();
+    private  HashMap<Item, Float> salesList = new HashMap<>();
+    private  HashMap<Item, Float> purchaseList = new HashMap<>();
 
 
-    HashMap<String, Float> getSalesList(){
+    HashMap<Item, Float> getSalesList(){
         return salesList;
     }
 
-    HashMap<String, Float> getPurchaseList(){
+    HashMap<Item, Float> getPurchaseList(){
         return purchaseList;
     }
 
@@ -42,10 +42,10 @@ public class Database {
         return itemList;
     }
 
-    void setSalesList(HashMap<String ,Float> newSalesList){
+    void setSalesList(HashMap<Item ,Float> newSalesList){
         salesList=newSalesList;
     }
-    void setPurchaseList(HashMap<String,Float> newPurchaseList ){
+    void setPurchaseList(HashMap<Item,Float> newPurchaseList ){
         purchaseList=newPurchaseList;
     }
     void setItemList(ArrayList<Item> newItemList){
@@ -63,10 +63,10 @@ public class Database {
     void removeItem(Item item){
         itemList.remove(item);
     }
-    void addSales(String id,float quantity){
-        salesList.put(id,quantity);
+    void addSales(Item id){
+        salesList.put(id, (float) 0.0);
     }
-    void addPurchase(String id,float quantity){
+    void addPurchase(Item id,float quantity){
         purchaseList.put(id,quantity);
     }
 
